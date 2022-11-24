@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://planets/Sun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/graphics.gd" type="Script" id=2]
+[ext_resource path="res://src/camera.gd" type="Script" id=3]
+[ext_resource path="res://assets/FiraSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://planets/Mercury.tscn" type="PackedScene" id=5]
+[ext_resource path="res://planets/Earth.tscn" type="PackedScene" id=6]
+[ext_resource path="res://planets/Venus.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
+
+[node name="Root" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296338, 5.13981 )
+current = true
+fov = 127.4
+script = ExtResource( 3 )
+
+[node name="Settings" type="Node2D" parent="."]
+
+[node name="ParticlesToggle" type="CheckButton" parent="Settings"]
+margin_top = 29.0
+margin_right = 215.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 2 )
+pressed = true
+text = "Ativar Particulas"
+flat = true
+align = 1
+script = ExtResource( 2 )
+
+[node name="GraphicsToggle" type="CheckButton" parent="Settings"]
+margin_right = 214.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 1 )
+text = "Melhorar gráfico"
+flat = true
+clip_text = true
+align = 1
+script = ExtResource( 2 )
+
+[node name="PausePlanetsToggle" type="CheckButton" parent="Settings"]
+margin_left = -3.0
+margin_top = 60.0
+margin_right = 211.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 1 )
+text = "Pausar planetas"
+flat = true
+clip_text = true
+align = 1
+script = ExtResource( 2 )
+
+[node name="Sun" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Earth" parent="Sun" instance=ExtResource( 6 )]
+transform = Transform( 0.561609, 0, 0, 0, 0.561609, 0, 0, 0, 0.561609, -0.265822, -0.0475199, 0 )
+
+[node name="Mercury" parent="Sun" instance=ExtResource( 5 )]
+transform = Transform( 0.548837, 0, 0, 0, 0.548837, 0, 0, 0, 0.548837, 0.0375737, -0.102444, -0.162469 )
+
+[node name="Planet" parent="Sun" instance=ExtResource( 7 )]
+transform = Transform( 0.413661, 0, 0, 0, 0.413661, 0, 0, 0, 0.413661, -0.0464391, 0.0130352, 0 )
+
+[connection signal="toggled" from="Settings/ParticlesToggle" to="Settings/ParticlesToggle" method="_on_ParticlesToggle_toggled"]
+[connection signal="toggled" from="Settings/GraphicsToggle" to="Settings/GraphicsToggle" method="_on_GraphicsToggle_toggled"]
+[connection signal="toggled" from="Settings/PausePlanetsToggle" to="Settings/PausePlanetsToggle" method="_on_PausePlanetsToggle_toggled"]

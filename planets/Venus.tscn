@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/planet.gd" type="Script" id=1]
+[ext_resource path="res://assets/FiraSans-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="SphereShape" id=21]
+
+[sub_resource type="SphereMesh" id=22]
+
+[sub_resource type="SpatialMaterial" id=23]
+albedo_color = Color( 0.843137, 0.462745, 0.0156863, 1 )
+refraction_enabled = true
+refraction_scale = 0.05
+refraction_texture_channel = 0
+
+[sub_resource type="DynamicFont" id=24]
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Planet" type="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33379, -0.0475199, 0 )
+script = ExtResource( 1 )
+force = 6
+area = 14
+planetInfo = "Vénus (português europeu) ou Vênus (português brasileiro) (AO 1990: Vénus ou Vênus) é o segundo planeta do Sistema Solar em ordem de distância a partir do Sol, orbitando-o a cada 224,7 dias. Recebeu seu nome em homenagem à deusa romana do amor e da beleza Vénus, equivalente a Afrodite. Depois da Lua, é o objeto mais brilhante do céu noturno, atingindo uma magnitude aparente de -4,6, o suficiente para produzir sombras. A distância média da Terra a Vênus é de 0,28 AU, sendo esta a menor distância entre qualquer par de planetas. Como Vénus se encontra mais próximo do Sol do que a Terra, ele pode ser visto aproximadamente na mesma direção do Sol (sua maior elongação é de 47,8°). Vénus atinge seu brilho máximo algumas horas antes da alvorada ou depois do ocaso, sendo por isso conhecido como a estrela da manhã (Estrela-d'Alva) ou estrela da tarde (Vésper); também é chamado Estrela do Pastor."
+
+[node name="Shape" type="CollisionShape" parent="."]
+shape = SubResource( 21 )
+
+[node name="Light" type="DirectionalLight" parent="."]
+
+[node name="Color" type="CSGMesh" parent="."]
+transform = Transform( 0.803543, 0, 0, 0, 0.795681, 0, 0, 0, 0.678652, 0, 0, 0 )
+mesh = SubResource( 22 )
+material = SubResource( 23 )
+
+[node name="Props" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -330.0
+margin_top = -601.0
+custom_fonts/normal_font = SubResource( 24 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_leave"]

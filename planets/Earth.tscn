@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/planet.gd" type="Script" id=1]
+[ext_resource path="res://assets/FiraSans-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="SphereShape" id=21]
+
+[sub_resource type="SphereMesh" id=22]
+
+[sub_resource type="SpatialMaterial" id=23]
+albedo_color = Color( 0.0156863, 0.223529, 0.72549, 1 )
+
+[sub_resource type="DynamicFont" id=24]
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Earth" type="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33379, -0.0475199, 0 )
+script = ExtResource( 1 )
+area = 12
+planetInfo = "A Terra é o terceiro planeta mais próximo do Sol, o mais denso e o quinto maior dos oito planetas do Sistema Solar. É também o maior dos quatro planetas telúricos. É por vezes designada como Mundo ou Planeta Azul. Lar de milhões de espécies de seres vivos, incluindo os humanos, a Terra é o único corpo celeste onde é conhecida a existência de vida. O planeta formou-se há 4,56 bilhões de anos, e a vida surgiu na sua superfície um bilhão de anos depois. Desde então, a biosfera terrestre alterou significativamente a atmosfera e outros fatores abióticos do planeta, permitindo a proliferação de organismos aeróbicos, bem como a formação de uma camada de ozônio, a qual, em conjunto com o campo magnético terrestre, bloqueia radiação solar prejudicial, permitindo a vida no planeta. As propriedades físicas do planeta, bem como sua história geológica e órbita, permitiram que a vida persistisse durante este período. Acredita-se que a Terra poderá suportar vida durante pelo menos outros 500 milhões de anos."
+
+[node name="Shape" type="CollisionShape" parent="."]
+shape = SubResource( 21 )
+
+[node name="Light" type="DirectionalLight" parent="."]
+
+[node name="Color" type="CSGMesh" parent="."]
+transform = Transform( 0.803543, 0, 0, 0, 0.795681, 0, 0, 0, 0.678652, 0, 0, 0 )
+mesh = SubResource( 22 )
+material = SubResource( 23 )
+
+[node name="Props" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -330.0
+margin_top = -601.0
+custom_fonts/normal_font = SubResource( 24 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_leave"]
